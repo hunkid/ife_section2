@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>task3</title>
+</head>
+<body>
+	<label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+	<button id="button">确认填写</button>
+
+	<div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+	<script type="text/javascript">
+		/*自己初次所写，因为没去查什么是AQI值，所以也没有怎么想去判断，只是想去把函数写完整，另外题目不允许在非script处添加事件。
+		function support(){
+			var bjqual=document.getElementById("aqi-input").value;
+			var showarea=document.getElementById("aqi-display");
+			showarea.innerHTML=bjqual;
+		}*/
+		//以下借鉴了得分第一"js高手之路"的写法
+		(function(){
+
+			var $ = function (id) {
+	  			return document.getElementById(id);
+  			}
+			function support(){
+				var bjqual=parseInt($("aqi-input").value);
+				if ((!isNaN(bjqual))&&(bjqual>=0)&&(bjqual<=500)) {
+					$("aqi-display").innerHTML=bjqual;
+				}
+				else{
+					alert(("aqi-input").value+" 不是一个有效的AQI值" );
+				}
+			}
+			$("button").onclick = function(){
+	  			support();
+  			}
+			$("aqi-input").onkeyup=function(event){
+				if (event.keyCode===13) {
+					support();				
+				}
+			}
+		})();
+
+	</script>
+
+</body>
+</html>
