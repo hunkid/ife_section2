@@ -12,7 +12,7 @@ function LRD(node){
 	 	node.style.backgroundColor = "white";
 	 },1000);
 }
-var i =0;
+var i = 0;
 function LDR(node){
 	if (node.getElementsByTagName('div').length != 0) {
 		setTimeout(function(){LRD(node.childNodes[1]);},1000);
