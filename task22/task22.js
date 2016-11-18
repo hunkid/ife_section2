@@ -1,32 +1,66 @@
-function LRD(node){
-	if (node.getElementsByTagName('div').length != 0) {
-		setTimeout(function(){LRD(node.childNodes[1]);},1000);
-	}
-	
-	if (node.getElementsByTagName('div').length != 0 &&node.childNodes[1] !== node.childNodes[node.childNodes.length-2]) {
-		setTimeout(function(){LRD(node.childNodes[node.childNodes.length-2]);},1000);
-	}
+var divList = [];
 
-	node.style.backgroundColor = "blue";
-	setTimeout(function(){
-	 	node.style.backgroundColor = "white";
-	 },1000);
-}
-var i = 0;
-function LDR(node){
-	if (node.getElementsByTagName('div').length != 0) {
-		setTimeout(function(){LRD(node.childNodes[1]);},1000);
-	}
-	node.style.backgroundColor = "blue";
-	// console.log(node.getAttribute("class")+"\n");
-	
-	setTimeout(function(){
-	 	node.style.backgroundColor = "white";
-	 },1000);
-	if (node.getElementsByTagName('div').length != 0 &&node.childNodes[1] !== node.childNodes[node.childNodes.length-2]) {
-		setTimeout(function(){LRD(node.childNodes[node.childNodes.length-2]);},2000);
+function DLR(node){   //前序遍历
+	if (node !== null) {
+		divList[divList.length] = node;
+		DLR(node.firstElementChild);
+		if (node.lastElementChild != node.firstElementChild) {
+			DLR(node.lastElementChild);
+		}
 	}
 }
 
+function LDR(node) {  //中序遍历
+	if (node !== null) {
+		LDR(node.firstElementChild);
+		divList[divList.length] = node;
+		if (node.lastElementChild != node.firstElementChild) {
+			LDR(node.lastElementChild);
+		}
+	}
+}
 
-setTimeout(function(){LDR(document.getElementById("c0"))},1000);
+function LRD(node) {
+	if (node !== null) {
+		LRD(node.firstElementChild);
+		if (node.lastElementChild != node.firstElementChild) {
+			LRD(node.lastElementChild);
+		}
+		divList[divList.length] = node;
+	}
+}
+
+function divListTurn(){
+	divList[0].style.backgroundColor = 'blue';
+	var i = 1;
+	var timer = setInterval(function(){
+		if (i < divList.length) {
+			divList[i-1].style.backgroundColor = 'white';
+			console.log(i);
+			divList[i++].style.backgroundColor = 'blue';
+		}else{
+			clearInterval(timer);
+			divList[divList.length-1].style.backgroundColor = 'white';
+		}
+	},1000);
+	
+	
+}
+
+window.onload = function(){
+	document.getElementById("DLR").onclick = function(){
+		divList = [];
+		DLR(document.getElementById("c0"));
+		divListTurn();
+	};
+	document.getElementById("LDR").onclick = function(){
+		divList = [];
+		LDR(document.getElementById("c0"));
+		divListTurn();
+	};
+	document.getElementById("LRD").onclick = function(){
+		divList = [];
+		LRD(document.getElementById("c0"));
+		divListTurn();
+	};
+}

@@ -18,3 +18,13 @@ div {
 	/*height: 800px;*/
 	margin:0 auto;
 }
+
+span {
+	width: 200px;
+	display: block;
+	margin: 0 auto;
+}
+button {
+	width: 60px;
+	height: 30px;
+}
