@@ -25,7 +25,7 @@ function addAqiData() {
 	var reg1 = new RegExp("[\\u4e00-\\u9fa5]");//匹配中文
 	var reg2 = new RegExp("[A-Za-z]"); // 匹配英文*/
 	var reg1 = new RegExp("[^\\u4e00-\\u9fa5A-Za-z]");//出现了中英文外的字符返回true
-	var reg2 = new RegExp("[^1-9]");
+	var reg2 = new RegExp("[^0-9]");
 	if(reg1.test(city)) {//如果都不能匹配中英
 	 	alert("您的城市输入不正确，请重新输入！");
 	 	return false;
